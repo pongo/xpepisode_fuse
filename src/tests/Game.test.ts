@@ -4,27 +4,40 @@ import { should } from 'fuse-test-runner';
 import Game from '../Game';
 
 export class GameTest {
+  private g: Game = new Game();
+
+  beforeEach() {
+    this.g = new Game();
+  }
+
   'One Throw'() {
-    const g = new Game();
-    g.add(5);
-    should(g.score()).equal(5);
+    this.g.add(5);
+    should(this.g.score()).equal(5);
   }
 
   'Two Throws No Mark'() {
-    const g = new Game();
-    g.add(5);
-    g.add(4);
-    should(g.score()).equal(9);
+    this.g.add(5);
+    this.g.add(4);
+    should(this.g.score()).equal(9);
   }
 
   'Four Throws No Mark'() {
-    const g = new Game();
-    g.add(5);
-    g.add(4);
-    g.add(7);
-    g.add(2);
-    should(g.score()).equal(18);
-    should(g.scoreForFrame(1)).equal(9);
-    should(g.scoreForFrame(2)).equal(18);
+    this.g.add(5);
+    this.g.add(4);
+    this.g.add(7);
+    this.g.add(2);
+    should(this.g.score()).equal(18);
+    should(this.g.scoreForFrame(1)).equal(9);
+    should(this.g.scoreForFrame(2)).equal(18);
+  }
+
+  'Simple Frame After Spare'() {
+    this.g.add(3);
+    this.g.add(7);
+    this.g.add(3);
+    this.g.add(2);
+    should(this.g.scoreForFrame(1)).equal(13);
+    should(this.g.scoreForFrame(2)).equal(18);
+    // TODO: should(this.g.score()).equal(18);
   }
 }

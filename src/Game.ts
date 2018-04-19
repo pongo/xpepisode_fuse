@@ -22,7 +22,11 @@ export default class Game {
       ball += 1;
       const secondThrow: number = this.itsThrows[ball];
       ball += 1;
-      score += firstThrow + secondThrow;
+      const frameScore = firstThrow + secondThrow;
+      // spare needs next frames first throw
+      if (frameScore === 10) {
+        score += frameScore + this.itsThrows[ball];
+      } else score += frameScore;
     }
 
     return score;
