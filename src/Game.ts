@@ -2,7 +2,7 @@ export default class Game {
   private itsScore: number = 0;
   private itsThrows: number[] = Array(21);
   private itsCurrentThrow: number = 0;
-  private itsCurrentFrame: number = 0;
+  private itsCurrentFrame: number = 1;
   private firstThrow: boolean = true;
 
   score(): number {
@@ -14,11 +14,15 @@ export default class Game {
     this.itsCurrentThrow += 1;
     this.itsScore += pins;
 
+    this.adjustCurrentFrame();
+  }
+
+  private adjustCurrentFrame(): void {
     if (this.firstThrow === true) {
       this.firstThrow = false;
-      this.itsCurrentFrame += 1;
     } else {
       this.firstThrow = true;
+      this.itsCurrentFrame += 1;
     }
   }
 
