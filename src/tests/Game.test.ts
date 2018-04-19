@@ -10,12 +10,6 @@ export class GameTest {
     this.g = new Game();
   }
 
-  'One Throw'() {
-    this.g.add(5);
-    should(this.g.score()).equal(5);
-    should(this.g.getCurrentFrame()).equal(1);
-  }
-
   'Two Throws No Mark'() {
     this.g.add(5);
     this.g.add(4);
@@ -41,8 +35,8 @@ export class GameTest {
     this.g.add(2);
     should(this.g.scoreForFrame(1)).equal(13);
     should(this.g.scoreForFrame(2)).equal(18);
+    should(this.g.score()).equal(18);
     should(this.g.getCurrentFrame()).equal(3);
-    // TODO: should(this.g.score()).equal(18);
   }
 
   'Simple Spare'() {

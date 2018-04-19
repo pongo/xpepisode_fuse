@@ -6,7 +6,7 @@ export default class Game {
   private firstThrow: boolean = true;
 
   score(): number {
-    return this.itsScore;
+    return this.scoreForFrame(this.getCurrentFrame() - 1);
   }
 
   add(pins: number): void {
