@@ -46,4 +46,13 @@ export class GameTest {
     should(this.g.scoreForFrame(1)).equal(13);
     should(this.g.getCurrentFrame()).equal(2);
   }
+
+  'Simple Strike'() {
+    this.g.add(10);
+    this.g.add(3);
+    this.g.add(6);
+    should(this.g.scoreForFrame(1)).equal(19);
+    should(this.g.score()).equal(28);
+    should(this.g.getCurrentFrame()).equal(3);
+  }
 }
