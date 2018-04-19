@@ -1,5 +1,11 @@
 export default class Frame {
+  private itsScore: number = 0;
+
   getScore(): number {
-    return 0;
+    return this.itsScore;
+  }
+
+  add(pins: number) {
+    this.itsScore += pins;
   }
 }
