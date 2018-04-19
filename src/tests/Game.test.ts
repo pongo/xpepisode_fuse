@@ -13,12 +13,14 @@ export class GameTest {
   'One Throw'() {
     this.g.add(5);
     should(this.g.score()).equal(5);
+    should(this.g.getCurrentFrame()).equal(1);
   }
 
   'Two Throws No Mark'() {
     this.g.add(5);
     this.g.add(4);
     should(this.g.score()).equal(9);
+    should(this.g.getCurrentFrame()).equal(1);
   }
 
   'Four Throws No Mark'() {
@@ -29,6 +31,7 @@ export class GameTest {
     should(this.g.score()).equal(18);
     should(this.g.scoreForFrame(1)).equal(9);
     should(this.g.scoreForFrame(2)).equal(18);
+    should(this.g.getCurrentFrame()).equal(2);
   }
 
   'Simple Frame After Spare'() {
