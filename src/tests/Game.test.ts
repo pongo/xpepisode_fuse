@@ -63,4 +63,56 @@ export class GameTest {
     should(this.g.score()).equal(300);
     should(this.g.getCurrentFrame()).equal(11);
   }
+
+  'End Of Array'() {
+    for (let i = 0; i < 9; i += 1) {
+      this.g.add(0);
+      this.g.add(0);
+    }
+    this.g.add(2);
+    this.g.add(8); // 10th frame spare
+    this.g.add(10); // Strike in last position of array.
+    should(this.g.score()).equal(20);
+  }
+
+  'Sample Game'() {
+    this.g.add(1);
+    this.g.add(4);
+    this.g.add(4);
+    this.g.add(5);
+    this.g.add(6);
+    this.g.add(4);
+    this.g.add(5);
+    this.g.add(5);
+    this.g.add(10);
+    this.g.add(0);
+    this.g.add(1);
+    this.g.add(7);
+    this.g.add(3);
+    this.g.add(6);
+    this.g.add(4);
+    this.g.add(10);
+    this.g.add(2);
+    this.g.add(8);
+    this.g.add(6);
+    should(this.g.score()).equal(133);
+  }
+
+  'Heart Break'() {
+    for (let i = 0; i < 11; i += 1) {
+      this.g.add(10);
+    }
+    this.g.add(9);
+    should(this.g.score()).equal(299);
+  }
+
+  'Tenth Frame Spare'() {
+    for (let i = 0; i < 9; i += 1) {
+      this.g.add(10);
+    }
+    this.g.add(9);
+    this.g.add(1);
+    this.g.add(1);
+    should(this.g.score()).equal(270);
+  }
 }
