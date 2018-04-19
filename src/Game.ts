@@ -7,22 +7,22 @@ export default class Game {
     return this.itsScore;
   }
 
-  add(pins: number) {
+  add(pins: number): void {
     this.itsThrows[this.itsCurrentThrow] = pins;
     this.itsCurrentThrow += 1;
     this.itsScore += pins;
   }
 
-  scoreForFrame(frame: number): number {
+  scoreForFrame(theFrame: number): number {
+    let ball: number = 0;
     let score: number = 0;
-    let frameCopy = frame;
 
-    for (
-      let ball = 0;
-      frameCopy > 0 && ball < this.itsCurrentThrow;
-      ball += 2, frameCopy -= 1
-    ) {
-      score += this.itsThrows[ball] + this.itsThrows[ball + 1];
+    for (let currentFrame = 0; currentFrame < theFrame; currentFrame += 1) {
+      const firstThrow: number = this.itsThrows[ball];
+      ball += 1;
+      const secondThrow: number = this.itsThrows[ball];
+      ball += 1;
+      score += firstThrow + secondThrow;
     }
 
     return score;
