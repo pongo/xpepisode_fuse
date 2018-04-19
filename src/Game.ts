@@ -28,6 +28,8 @@ export default class Game {
       this.firstThrow = true;
       this.itsCurrentFrame += 1;
     }
+
+    this.itsCurrentFrame = Math.min(11, this.itsCurrentFrame);
   }
 
   scoreForFrame(theFrame: number): number {

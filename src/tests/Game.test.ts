@@ -55,4 +55,12 @@ export class GameTest {
     should(this.g.score()).equal(28);
     should(this.g.getCurrentFrame()).equal(3);
   }
+
+  'Perfect Game'() {
+    for (let i = 0; i < 12; i += 1) {
+      this.g.add(10);
+    }
+    should(this.g.score()).equal(300);
+    should(this.g.getCurrentFrame()).equal(11);
+  }
 }
