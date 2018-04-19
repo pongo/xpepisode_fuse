@@ -41,6 +41,15 @@ export class GameTest {
     this.g.add(2);
     should(this.g.scoreForFrame(1)).equal(13);
     should(this.g.scoreForFrame(2)).equal(18);
+    should(this.g.getCurrentFrame()).equal(3);
     // TODO: should(this.g.score()).equal(18);
+  }
+
+  'Simple Spare'() {
+    this.g.add(3);
+    this.g.add(7);
+    this.g.add(3);
+    should(this.g.scoreForFrame(1)).equal(13);
+    should(this.g.getCurrentFrame()).equal(2);
   }
 }
