@@ -3,7 +3,10 @@ export default class Game {
   private itsThrows: number[] = Array(21);
   private itsCurrentThrow: number = 0;
   private itsCurrentFrame: number = 1;
-  private firstThrow: boolean = true;
+  private firstThrowInFrame: boolean = true;
+  private ball: number = 0;
+  private firstThrow: number = 0;
+  private secondThrow: number = 0;
 
   score(): number {
     return this.scoreForFrame(this.getCurrentFrame() - 1);
@@ -17,15 +20,15 @@ export default class Game {
   }
 
   private adjustCurrentFrame(pins: number): void {
-    if (this.firstThrow === true) {
+    if (this.firstThrowInFrame === true) {
       // strike
       if (pins === 10) {
         this.itsCurrentFrame += 1;
       } else {
-        this.firstThrow = false;
+        this.firstThrowInFrame = false;
       }
     } else {
-      this.firstThrow = true;
+      this.firstThrowInFrame = true;
       this.itsCurrentFrame += 1;
     }
 
@@ -33,27 +36,34 @@ export default class Game {
   }
 
   scoreForFrame(theFrame: number): number {
-    let ball: number = 0;
+    this.ball = 0;
     let score: number = 0;
 
     for (let currentFrame = 0; currentFrame < theFrame; currentFrame += 1) {
-      const firstThrow: number = this.itsThrows[ball];
-      ball += 1;
-      if (firstThrow === 10) {
-        score += 10 + this.itsThrows[ball] + this.itsThrows[ball + 1];
+      this.firstThrow = this.itsThrows[this.ball];
+      if (this.firstThrow === 10) {
+        this.ball += 1;
+        score += 10 + this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
       } else {
-        const secondThrow: number = this.itsThrows[ball];
-        ball += 1;
-        const frameScore = firstThrow + secondThrow;
-        // spare needs next frames first throw
-        if (frameScore === 10) {
-          score += frameScore + this.itsThrows[ball];
-        } else {
-          score += frameScore;
-        }
+        score += this.handleSecondThrow();
       }
     }
 
+    return score;
+  }
+
+  private handleSecondThrow() {
+    let score: number = 0;
+    this.secondThrow = this.itsThrows[this.ball + 1];
+    const frameScore = this.firstThrow + this.secondThrow;
+    // spare needs next frames first throw
+    if (frameScore === 10) {
+      this.ball += 2;
+      score += frameScore + this.itsThrows[this.ball];
+    } else {
+      this.ball += 2;
+      score += frameScore;
+    }
     return score;
   }
 
