@@ -41,9 +41,9 @@ export default class Game {
 
     for (let currentFrame = 0; currentFrame < theFrame; currentFrame += 1) {
       this.firstThrow = this.itsThrows[this.ball];
-      if (this.firstThrow === 10) {
+      if (this.strike()) {
         this.ball += 1;
-        score += 10 + this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
+        score += 10 + this.nextTwoBalls();
       } else {
         score += this.handleSecondThrow();
       }
@@ -65,6 +65,14 @@ export default class Game {
       score += frameScore;
     }
     return score;
+  }
+
+  private strike(): boolean {
+    return this.itsThrows[this.ball] === 10;
+  }
+
+  private nextTwoBalls(): number {
+    return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
   }
 
   getCurrentFrame(): number {
