@@ -5,8 +5,6 @@ export default class Game {
   private itsCurrentFrame: number = 1;
   private firstThrowInFrame: boolean = true;
   private ball: number = 0;
-  private firstThrow: number = 0;
-  private secondThrow: number = 0;
 
   score(): number {
     return this.scoreForFrame(this.getCurrentFrame() - 1);
@@ -40,7 +38,6 @@ export default class Game {
     let score: number = 0;
 
     for (let currentFrame = 0; currentFrame < theFrame; currentFrame += 1) {
-      this.firstThrow = this.itsThrows[this.ball];
       if (this.strike()) {
         this.ball += 1;
         score += 10 + this.nextTwoBalls();
@@ -54,12 +51,10 @@ export default class Game {
 
   private handleSecondThrow() {
     let score: number = 0;
-    this.secondThrow = this.itsThrows[this.ball + 1];
-    const frameScore = this.firstThrow + this.secondThrow;
     // spare needs next frames first throw
     if (this.spare()) {
       this.ball += 2;
-      score += frameScore + this.nextBall();
+      score += 10 + this.nextBall();
     } else {
       score += this.twoBallsInFrame();
       this.ball += 2;
