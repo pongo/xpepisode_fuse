@@ -57,14 +57,18 @@ export default class Game {
     this.secondThrow = this.itsThrows[this.ball + 1];
     const frameScore = this.firstThrow + this.secondThrow;
     // spare needs next frames first throw
-    if (frameScore === 10) {
+    if (this.spare()) {
       this.ball += 2;
-      score += frameScore + this.itsThrows[this.ball];
+      score += frameScore + this.nextBall();
     } else {
       this.ball += 2;
       score += frameScore;
     }
     return score;
+  }
+
+  private nextBall(): number {
+    return this.itsThrows[this.ball];
   }
 
   private strike(): boolean {
@@ -77,5 +81,9 @@ export default class Game {
 
   getCurrentFrame(): number {
     return this.itsCurrentFrame;
+  }
+
+  private spare(): boolean {
+    return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1] === 10;
   }
 }
