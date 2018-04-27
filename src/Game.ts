@@ -14,6 +14,10 @@ export default class Game {
     this.adjustCurrentFrame(pins);
   }
 
+  scoreForFrame(theFrame: number): number {
+    return this.itsScorer.scoreForFrame(theFrame);
+  }
+
   private adjustCurrentFrame(pins: number): void {
     if (this.firstThrowInFrame) {
       if (this.adjustFrameForStrike(pins) === false) {
@@ -27,10 +31,6 @@ export default class Game {
 
   private advanceFrame(): void {
     this.itsCurrentFrame = Math.min(10, this.itsCurrentFrame + 1);
-  }
-
-  scoreForFrame(theFrame: number): number {
-    return this.itsScorer.scoreForFrame(theFrame);
   }
 
   private adjustFrameForStrike(pins: number): boolean {
