@@ -1,12 +1,12 @@
 import Scorer from './Scorer';
 
 export default class Game {
-  private itsCurrentFrame: number = 1;
+  private itsCurrentFrame: number = 0;
   private firstThrowInFrame: boolean = true;
   private itsScorer: Scorer = new Scorer();
 
   score(): number {
-    return this.scoreForFrame(this.getCurrentFrame() - 1);
+    return this.scoreForFrame(this.itsCurrentFrame);
   }
 
   add(pins: number): void {
@@ -26,15 +26,11 @@ export default class Game {
   }
 
   private advanceFrame(): void {
-    this.itsCurrentFrame = Math.min(11, this.itsCurrentFrame + 1);
+    this.itsCurrentFrame = Math.min(10, this.itsCurrentFrame + 1);
   }
 
   scoreForFrame(theFrame: number): number {
     return this.itsScorer.scoreForFrame(theFrame);
-  }
-
-  getCurrentFrame(): number {
-    return this.itsCurrentFrame;
   }
 
   private adjustFrameForStrike(pins: number): boolean {
