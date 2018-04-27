@@ -39,26 +39,14 @@ export default class Game {
 
     for (let currentFrame = 0; currentFrame < theFrame; currentFrame += 1) {
       if (this.strike()) {
-        this.ball += 1;
         score += 10 + this.nextTwoBalls();
+      } else if (this.spare()) {
+        score += 10 + this.nextBall();
       } else {
-        score += this.handleSecondThrow();
+        score += this.twoBallsInFrame();
       }
     }
 
-    return score;
-  }
-
-  private handleSecondThrow() {
-    let score: number = 0;
-    // spare needs next frames first throw
-    if (this.spare()) {
-      this.ball += 2;
-      score += 10 + this.nextBall();
-    } else {
-      score += this.twoBallsInFrame();
-      this.ball += 2;
-    }
     return score;
   }
 
@@ -67,7 +55,11 @@ export default class Game {
   }
 
   private strike(): boolean {
-    return this.itsThrows[this.ball] === 10;
+    if (this.itsThrows[this.ball] === 10) {
+      this.ball += 1;
+      return true;
+    }
+    return false;
   }
 
   private nextTwoBalls(): number {
@@ -79,10 +71,16 @@ export default class Game {
   }
 
   private spare(): boolean {
-    return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1] === 10;
+    if (this.itsThrows[this.ball] + this.itsThrows[this.ball + 1] === 10) {
+      this.ball += 2;
+      return true;
+    }
+    return false;
   }
 
   private twoBallsInFrame(): number {
-    return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
+    const score = this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
+    this.ball += 2;
+    return score;
   }
 }
