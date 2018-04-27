@@ -61,8 +61,8 @@ export default class Game {
       this.ball += 2;
       score += frameScore + this.nextBall();
     } else {
+      score += this.twoBallsInFrame();
       this.ball += 2;
-      score += frameScore;
     }
     return score;
   }
@@ -85,5 +85,9 @@ export default class Game {
 
   private spare(): boolean {
     return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1] === 10;
+  }
+
+  private twoBallsInFrame(): number {
+    return this.itsThrows[this.ball] + this.itsThrows[this.ball + 1];
   }
 }
