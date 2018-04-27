@@ -1,7 +1,6 @@
 import Scorer from './Scorer';
 
 export default class Game {
-  private itsScore: number = 0;
   private itsCurrentFrame: number = 1;
   private firstThrowInFrame: boolean = true;
   private itsScorer: Scorer = new Scorer();
@@ -12,7 +11,6 @@ export default class Game {
 
   add(pins: number): void {
     this.itsScorer.addThrow(pins);
-    this.itsScore += pins;
     this.adjustCurrentFrame(pins);
   }
 
