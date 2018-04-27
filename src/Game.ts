@@ -18,16 +18,18 @@ export default class Game {
     if (this.firstThrowInFrame) {
       // strike
       if (pins === 10) {
-        this.itsCurrentFrame += 1;
+        this.advanceFrame();
       } else {
         this.firstThrowInFrame = false;
       }
     } else {
       this.firstThrowInFrame = true;
-      this.itsCurrentFrame += 1;
+      this.advanceFrame();
     }
+  }
 
-    this.itsCurrentFrame = Math.min(11, this.itsCurrentFrame);
+  private advanceFrame(): void {
+    this.itsCurrentFrame = Math.min(11, this.itsCurrentFrame + 1);
   }
 
   scoreForFrame(theFrame: number): number {
