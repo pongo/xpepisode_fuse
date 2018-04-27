@@ -16,10 +16,7 @@ export default class Game {
 
   private adjustCurrentFrame(pins: number): void {
     if (this.firstThrowInFrame) {
-      // strike
-      if (pins === 10) {
-        this.advanceFrame();
-      } else {
+      if (this.adjustFrameForStrike(pins) === false) {
         this.firstThrowInFrame = false;
       }
     } else {
@@ -38,5 +35,13 @@ export default class Game {
 
   getCurrentFrame(): number {
     return this.itsCurrentFrame;
+  }
+
+  private adjustFrameForStrike(pins: number): boolean {
+    if (pins === 10) {
+      this.advanceFrame();
+      return true;
+    }
+    return false;
   }
 }
