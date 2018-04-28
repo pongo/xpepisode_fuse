@@ -14,16 +14,16 @@
 ### Установка
 
 ```sh
-$ git clone https://github.com/pongo/xpepisode_fuse.git
-$ cd xpepisode_fuse
-$ npm install
+git clone https://github.com/pongo/xpepisode_fuse.git
+cd xpepisode_fuse
+npm install
 ```
 
 ### Запуск тестов
 
 ```sh
-$ npm test
-$ npm run test-watch
+npm test
+npm run test-watch
 ```
 
 `test-watch` — перезапускает тесты при изменении кода.
